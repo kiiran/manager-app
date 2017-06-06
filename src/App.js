@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import firebase from 'firebase';
+import LoginForm from './components/LoginForm';
 import reducers from './reducers';
 import * as config from '../config';
 
@@ -14,11 +15,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={createStore(reducers)}>
-        <View>
-          <Text>
-            Hello!
-          </Text>
-        </View>
+        <LoginForm />
       </Provider>
     );
   }
