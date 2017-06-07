@@ -1,2 +1,4 @@
-const EMAIL_CHANGED = 'email_changed';
-const PASSWORD_CHANGED = 'password_changed';
+export const EMAIL_CHANGED = 'EMAIL_CHANGED';
+export const PASSWORD_CHANGED = 'PASSWORD_CHANGED';
+export const SUCCESSFULLY_LOGGED_IN = 'SUCCESSFULLY_LOGGED_IN';
+export const LOGIN_FAILED = 'LOGIN_FAILED';
