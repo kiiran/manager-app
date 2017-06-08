@@ -2,6 +2,7 @@ import firebase from 'firebase';
 import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,
+  STARTING_LOGIN,
   SUCCESSFULLY_LOGGED_IN,
   LOGIN_FAILED
 } from './types';
@@ -22,6 +23,8 @@ export const passwordChanged = (text) => {
 
 export const loginUser = ({ email, password }) => {
   return (dispatch) => {
+    dispatch({ type: STARTING_LOGIN });
+    
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => successfullyLoggedIn(dispatch, user))
       .catch(() => {
