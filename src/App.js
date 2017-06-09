@@ -6,6 +6,7 @@ import firebase from 'firebase';
 import LoginForm from './components/LoginForm';
 import reducers from './reducers';
 import firebaseConfig from '../config';
+import Router from './Router';
 
 class App extends Component {
   componentWillMount() {
@@ -17,7 +18,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <LoginForm />
+        <Router />
       </Provider>
     );
   }
