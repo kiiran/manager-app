@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Keyboard, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
 import { Button, Card, CardSection, Input, Spinner } from './common';
@@ -14,13 +14,13 @@ class LoginForm extends Component {
 
   onButtonPress() {
     const { email, password } = this.props;
-
+    Keyboard.dismiss();
     this.props.loginUser({ email, password });
   }
 
   renderButton() {
     if (this.props.loading) { return <Spinner size="large" />; }
-    
+
     return (
       <Button onPress={this.onButtonPress.bind(this)}>
         Log in
