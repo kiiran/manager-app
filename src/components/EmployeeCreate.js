@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import { Keyboard, Picker, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { employeeUpdate } from '../actions';
-import { Button, Card, CardSection, Input, Spinner } from './common';
+import { employeeUpdate, employeeCreate } from '../actions';
+import { Button, Card, CardSection, Input } from './common';
 
 class EmployeeCreate extends Component {
+  onButtonPress() {
+    Keyboard.dismiss();
+    const { name, phone, shift } = this.props;
+    this.props.employeeCreate({ name, phone, shift: shift || 'Monday' });
+  }
 
+  onChange(value) {
+    Keyboard.dismiss();
+    this.props.employeeUpdate({ prop: 'shift', value });
+  }
 
   render() {
     return (
@@ -15,16 +24,17 @@ class EmployeeCreate extends Component {
             label="Name"
             placeholder="Itsa Thatguy"
             value={this.props.name}
-            onChangeText={name => this.props.employeeUpdate({ prop: 'name', name })}
+            onChangeText={value => this.props.employeeUpdate({ prop: 'name', value })}
           />
         </CardSection>
 
         <CardSection>
           <Input
+            keyboardType='numeric'
             label="Phone"
             placeholder="+351912345678"
             value={this.props.phone}
-            onChangeText={phoneNumber => this.props.employeeUpdate({ prop: 'phone', phoneNumber })}
+            onChangeText={value => this.props.employeeUpdate({ prop: 'phone', value })}
           />
         </CardSection>
 
@@ -32,7 +42,7 @@ class EmployeeCreate extends Component {
           <Text style={styles.pickerTextStyle}>Select a shift</Text>
           <Picker
             selectedValue={this.props.shift}
-            onValueChange={value => this.props.employeeUpdate({ prop: 'shift', value })}
+            onValueChange={value => this.onChange(value)}
           >
             <Picker.Item label="Monday" value="Monday" />
             <Picker.Item label="Tuesday" value="Tuesday" />
@@ -45,7 +55,7 @@ class EmployeeCreate extends Component {
         </CardSection>
 
         <CardSection>
-          <Button onPress={Keyboard.dismiss}>
+          <Button onPress={this.onButtonPress.bind(this)}>
             Add
           </Button>
         </CardSection>
@@ -63,9 +73,12 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
+  console.log(state);
   const { name, phone, shift } = state.employeeForm;
 
   return { name, phone, shift };
 };
 
-export default connect(mapStateToProps, { employeeUpdate })(EmployeeCreate);
+export default connect(mapStateToProps, {
+  employeeUpdate, employeeCreate
+})(EmployeeCreate);

@@ -6,7 +6,8 @@ import { Button, Card, CardSection, Input, Spinner } from './common';
 
 class LoginForm extends Component {
   onEmailChange(text) {
-    this.props.emailChanged(text);
+    const email = text.trim();
+    this.props.emailChanged(email);
   }
   onPasswordChange(text) {
     this.props.passwordChanged(text);
@@ -35,6 +36,7 @@ class LoginForm extends Component {
           <Input
             label="Email"
             placeholder="your@email.com"
+            keyboardType="email-address"
             onChangeText={this.onEmailChange.bind(this)}
             value={this.props.email}
           />
