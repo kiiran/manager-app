@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import firebase from 'firebase';
-import LoginForm from './components/LoginForm';
 import reducers from './reducers';
 import firebaseConfig from '../config';
 import Router from './Router';
